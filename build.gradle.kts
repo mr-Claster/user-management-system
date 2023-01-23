@@ -27,11 +27,13 @@ dependencies {
 	implementation("org.jetbrains:annotations:20.1.0")
 	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
     implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
-    compileOnly("org.projectlombok:lombok")
+	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.postgresql:postgresql")
+	implementation("org.liquibase:liquibase-core:4.18.0")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+	testImplementation("io.rest-assured:spring-mock-mvc:4.0.0")
 }
 
 tasks.withType<Test> {

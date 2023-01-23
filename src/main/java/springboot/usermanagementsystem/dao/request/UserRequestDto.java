@@ -2,7 +2,6 @@ package springboot.usermanagementsystem.dao.request;
 
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
-import springboot.usermanagementsystem.model.Role;
 
 @Data
 public class UserRequestDto {
@@ -18,5 +17,5 @@ public class UserRequestDto {
     @Pattern(regexp = PATTERN_PASSWORD)
     private String password;
     private String status;
-    private Role role;
+    private String userRole;
 }

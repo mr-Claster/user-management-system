@@ -7,6 +7,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Objects;
 
@@ -18,8 +20,9 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @OneToOne
+    @JoinColumn(name = "role_id")
+    private UserRole userRole;
     @Enumerated(EnumType.STRING)
     private Status status;
     @Column(unique = true)
@@ -53,12 +56,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Role getRole() {
-        return role;
+    public UserRole getRole() {
+        return userRole;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     public Status getStatus() {
@@ -97,7 +100,7 @@ public class User {
         return Objects.equals(id, user.id)
                 && Objects.equals(firstName, user.firstName)
                 && Objects.equals(lastName, user.lastName)
-                && Objects.equals(role, user.role)
+                && Objects.equals(userRole, user.userRole)
                 && status == user.status
                 && Objects.equals(username, user.username)
                 && Objects.equals(password, user.password);
