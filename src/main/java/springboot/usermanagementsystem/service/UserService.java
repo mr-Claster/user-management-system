@@ -1,13 +1,13 @@
 package springboot.usermanagementsystem.service;
 
-import springboot.usermanagementsystem.model.User;
 import java.util.List;
 import java.util.Optional;
+import springboot.usermanagementsystem.model.User;
 
 public interface UserService {
     User save(User user);
 
-    User get(Long id);
+    User getById(Long id);
 
     List<User> getAll();
 

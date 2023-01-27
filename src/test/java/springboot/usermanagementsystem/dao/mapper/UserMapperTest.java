@@ -1,7 +1,5 @@
 package springboot.usermanagementsystem.dao.mapper;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -31,20 +29,20 @@ class UserMapperTest {
         userRequestDto.setFirstName("FirstName");
         userRequestDto.setLastName("LastName");
         userRequestDto.setUsername("Username");
-        userRequestDto.setUserRole("ADMIN");
+        userRequestDto.getUserRole().add("ADMIN");
         userRequestDto.setPassword("afds2Dsd/");
         userRequestDto.setStatus("ACTIVE");
 
         UserRole admin = new UserRole();
         admin.setId(1L);
         admin.setRole("ADMIN");
-        Mockito.when(userRoleService.get("ADMIN")).thenReturn(admin);
+        Mockito.when(userRoleService.getByName("ADMIN")).thenReturn(admin);
 
         User expected = new User();
         expected.setFirstName("FirstName");
         expected.setLastName("LastName");
         expected.setUsername("Username");
-        expected.setRole(admin);
+        expected.getRoles().add(admin);
         expected.setPassword("afds2Dsd/");
         expected.setStatus(Status.ACTIVE);
 
@@ -63,7 +61,7 @@ class UserMapperTest {
         user.setFirstName("FirstName");
         user.setLastName("LastName");
         user.setUsername("Username");
-        user.setRole(admin);
+        user.getRoles().add(admin);
         user.setPassword("afds2Dsd/");
         user.setStatus(Status.ACTIVE);
 
@@ -71,7 +69,7 @@ class UserMapperTest {
         expected.setId(1L);
         expected.setFirstName("FirstName");
         expected.setLastName("LastName");
-        expected.setUserRole("ADMIN");
+        expected.getUserRole().add("ADMIN");
         expected.setStatus("ACTIVE");
 
         UserResponseDto actual = userMapper.toResponseDto(user);

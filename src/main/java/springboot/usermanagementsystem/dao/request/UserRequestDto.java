@@ -1,12 +1,14 @@
 package springboot.usermanagementsystem.dao.request;
 
 import jakarta.validation.constraints.Pattern;
+import java.util.List;
 import lombok.Data;
 
 @Data
 public class UserRequestDto {
-    private final String PATTERN_ONLY_LETTERS = "^[A-Za-z]+$";
-    private final String PATTERN_PASSWORD = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).+$";
+    private static final String PATTERN_ONLY_LETTERS = "^[A-Za-z]+$";
+    private static final String PATTERN_PASSWORD
+            = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).+$";
 
     @Pattern(regexp = PATTERN_ONLY_LETTERS)
     private String firstName;
@@ -17,5 +19,5 @@ public class UserRequestDto {
     @Pattern(regexp = PATTERN_PASSWORD)
     private String password;
     private String status;
-    private String userRole;
+    private List<String> userRole;
 }

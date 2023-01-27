@@ -1,6 +1,8 @@
 package springboot.usermanagementsystem.controller;
 
 import jakarta.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +14,6 @@ import springboot.usermanagementsystem.dao.request.UserRequestDto;
 import springboot.usermanagementsystem.dao.response.UserResponseDto;
 import springboot.usermanagementsystem.model.User;
 import springboot.usermanagementsystem.service.UserService;
-import java.util.List;
-import java.util.stream.Collectors;
-
 
 @RestController
 @RequestMapping("/users")
@@ -37,12 +36,11 @@ public class UserController {
 
     @GetMapping("/{id}")
     UserResponseDto getById(@PathVariable Long id) {
-        User user = userService.get(id);
-        user = userService.save(user);
+        User user = userService.getById(id);
         return userMapper.toResponseDto(user);
     }
 
-    @PostMapping()
+    @PostMapping
     UserResponseDto create(@RequestBody @Valid UserRequestDto userRequestDto) {
         return userMapper.toResponseDto(
                 userService.save(

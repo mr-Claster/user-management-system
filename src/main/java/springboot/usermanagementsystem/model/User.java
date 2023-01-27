@@ -8,8 +8,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,9 +23,13 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    @OneToOne
-    @JoinColumn(name = "role_id")
-    private UserRole userRole;
+    @ManyToMany
+    @JoinTable(
+            name = "roles_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+
+    private List<UserRole> userRoles;
     @Enumerated(EnumType.STRING)
     private Status status;
     @Column(unique = true)
@@ -30,6 +37,7 @@ public class User {
     private String password;
 
     public User() {
+        userRoles = new ArrayList<>();
     }
 
     public Long getId() {
@@ -56,12 +64,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public UserRole getRole() {
-        return userRole;
+    public List<UserRole> getRoles() {
+        return userRoles;
     }
 
-    public void setRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setRoles(List<UserRole> userRole) {
+        this.userRoles = userRole;
     }
 
     public Status getStatus() {
@@ -100,7 +108,7 @@ public class User {
         return Objects.equals(id, user.id)
                 && Objects.equals(firstName, user.firstName)
                 && Objects.equals(lastName, user.lastName)
-                && Objects.equals(userRole, user.userRole)
+                && Objects.equals(userRoles, user.userRoles)
                 && status == user.status
                 && Objects.equals(username, user.username)
                 && Objects.equals(password, user.password);

@@ -27,9 +27,4 @@ Example
 >spring.datasource.password=PASSWORD
 >spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQL81Dialect
 
->spring.datasource.url=jdbc:postgresql://localhost:5432/user_management
->spring.datasource.username=postgres
->spring.datasource.password=postgres
->spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQL81Dialect
-
 3. Run application

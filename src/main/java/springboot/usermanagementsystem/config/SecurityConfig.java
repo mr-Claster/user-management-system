@@ -33,10 +33,14 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers(HttpMethod.GET, "/user").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
-                    auth.requestMatchers(HttpMethod.GET, "/user/{id}").hasAnyAuthority("ROLE_ADMIN");
-                    auth.requestMatchers(HttpMethod.POST, "/user/new").hasAnyAuthority("ROLE_ADMIN");
-                    auth.requestMatchers(HttpMethod.GET, "/user/{id}/edit").hasAnyAuthority("ROLE_ADMIN");
+                    auth.requestMatchers(HttpMethod.GET, "/user")
+                            .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
+                    auth.requestMatchers(HttpMethod.GET, "/user/{id}")
+                            .hasAnyAuthority("ROLE_ADMIN");
+                    auth.requestMatchers(HttpMethod.POST, "/user/new")
+                            .hasAnyAuthority("ROLE_ADMIN");
+                    auth.requestMatchers(HttpMethod.GET, "/user/{id}/edit")
+                            .hasAnyAuthority("ROLE_ADMIN");
                     auth.requestMatchers("/**").permitAll();
                 })
                 .httpBasic()

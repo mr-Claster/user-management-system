@@ -1,12 +1,12 @@
 package springboot.usermanagementsystem.service.impl;
 
+import java.util.List;
+import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import springboot.usermanagementsystem.model.User;
 import springboot.usermanagementsystem.repository.UserRepository;
 import springboot.usermanagementsystem.service.UserService;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(Long id) {
+    public User getById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User with id " + id + " not found"));
     }

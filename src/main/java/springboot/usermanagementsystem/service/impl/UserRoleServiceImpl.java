@@ -14,13 +14,13 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public UserRole get(Long id) {
+    public UserRole getById(Long id) {
         return userRoleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Can't find role by id: " + id));
     }
 
     @Override
-    public UserRole get(String role) {
+    public UserRole getByName(String role) {
         return userRoleRepository.findUserRoleByRole(role)
                 .orElseThrow(() -> new RuntimeException("Can't find role by role name: " + role));
     }

@@ -1,11 +1,12 @@
 package springboot.usermanagementsystem.dao.mapper;
 
-
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import springboot.usermanagementsystem.dao.request.UserRequestDto;
 import springboot.usermanagementsystem.dao.response.UserResponseDto;
 import springboot.usermanagementsystem.model.Status;
 import springboot.usermanagementsystem.model.User;
+import springboot.usermanagementsystem.model.UserRole;
 import springboot.usermanagementsystem.service.UserRoleService;
 
 @Component
@@ -23,7 +24,9 @@ public class UserMapper {
         user.setPassword(dto.getPassword());
         user.setUsername(dto.getUsername());
         user.setStatus(Status.valueOf(dto.getStatus()));
-        user.setRole(userRoleService.get(dto.getUserRole()));
+        user.setRoles(dto.getUserRole().stream()
+                .map(userRoleService::getByName)
+                .collect(Collectors.toList()));
         return user;
     }
 
@@ -33,7 +36,9 @@ public class UserMapper {
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
         dto.setStatus(user.getStatus().toString());
-        dto.setUserRole(user.getRole().getRole());
+        dto.setUserRole(user.getRoles().stream()
+                .map(UserRole::getRole)
+                .collect(Collectors.toList()));
         return dto;
     }
 }
